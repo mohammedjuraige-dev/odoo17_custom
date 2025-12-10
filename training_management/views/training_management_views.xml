@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    Tree view-->
+    <record id="view_training_management_tree" model="ir.ui.view">
+        <field name="name">training.course.tree</field>
+        <field name="model">training.course</field>
+        <field name="arch" type="xml">
+            <tree string="Training management">
+                <field name="name"/>
+                <field name="instructor_id"/>
+                <field name="trainee_ids"/>
+<!--                <field name="description"/>-->
+            </tree>
+        </field>
+    </record>
+
+
+
+
+<!--    Form view-->
+    <record id="view_training_management_form" model="ir.ui.view">
+        <field name="name">Training.management.form</field>
+        <field name="model">training.course</field>
+        <field name="arch" type="xml">
+
+
+            <form string="Training management">
+                <sheet>
+
+                <div class="oe_button_box" name="button_box">
+    <button name="action_view_trainees"
+            type="object"
+            class="oe_stat_button"
+            icon="fa-users">
+        <field name="trainee_count" widget="statinfo"/>
+    </button>
+</div>
+
+                    <group>
+                        <field name="name"/>
+                        <field name="instructor_id"/>
+
+                    </group>
+                    <group>
+                        <field name="trainee_ids">
+                            <tree>
+                                <field name="complete_name" string="Trainee name"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+
+
+
+
+
+<!--    Action-->
+    <record id="action_training_management" model="ir.actions.act_window">
+        <field name="name">Training management</field>
+        <field name="res_model">training.course</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id ="training_management_menu" name="Training management"
+              parent="product_validator.my_menu_root" action="action_training_management"/>
+
+
+
+</odoo>
