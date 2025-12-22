@@ -1,0 +1,41 @@
+<odoo>
+<record id="view_wizard_form" model="ir.ui.view">
+    <field name="name">custom.order.taker.wizard.form</field>
+    <field name="model">custom.order.taker.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Confirm Order">
+            <div>
+               <div class="o_form_label">
+                Do you want to confirm order?
+            </div>
+                <field name="product_quantity" readonly="0"/>
+            </div>
+            <footer>
+                <button name="confirm" string="Confirm" type="object" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+
+
+
+<record id="action_my_wizard" model="ir.actions.act_window">
+    <field name="name">Order Taker Wizard</field>
+    <field name="res_model">custom.order.taker.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_wizard_form"/>
+    <field name="target">new</field>
+
+    <!-- This makes the wizard load existing field values -->
+    <field name="context">
+        {
+            "active_id": active_id,
+            "active_model": active_model,
+        }
+    </field>
+</record>
+
+
+</odoo>

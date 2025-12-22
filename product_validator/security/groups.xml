@@ -1,0 +1,27 @@
+<odoo>
+    <!-- Custom category (optional) -->
+    <record id="module_category_product_validator" model="ir.module.category">
+        <field name="name">Product Validator</field>
+    </record>
+
+    <!-- User Group (internal user + CRUD) -->
+    <record id="group_product_validator_user" model="res.groups">
+        <field name="name">Product Validator User</field>
+        <field name="category_id" ref="module_category_product_validator"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Viewer Group (internal user + read-only) -->
+    <record id="group_product_validator_viewer" model="res.groups">
+        <field name="name">Product Validator Viewer</field>
+        <field name="category_id" ref="module_category_product_validator"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+
+<!--       <record id="group_product_validator_new_user" model="res.groups">-->
+<!--        <field name="name">Product Validator NewUser</field>-->
+<!--        <field name="category_id" ref="module_category_product_validator"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--    </record>-->
+</odoo>

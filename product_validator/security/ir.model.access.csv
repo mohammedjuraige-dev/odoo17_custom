@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_validator_admin,product.validator.admin,model_product_validator,base.group_system,1,1,1,1
+access_product_validator_user,product.validator.user,model_product_validator,group_product_validator_user,1,1,1,0
+access_product_validator_viewer,product.validator.viewer,model_product_validator,group_product_validator_viewer,1,0,0,0

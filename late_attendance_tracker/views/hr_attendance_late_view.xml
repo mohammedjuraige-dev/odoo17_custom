@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_hr_attendance_form_inherit_late" model="ir.ui.view">
+    <field name="name">hr.attendance.form.inherit.late</field>
+    <field name="model">hr.attendance</field>
+    <!-- Use the correct view ID -->
+    <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+    <field name="arch" type="xml">
+        <!-- Add field after check_out field -->
+        <xpath expr="//field[@name='overtime_hours']" position="after">
+            <field name="late_time_hours" readonly="1" widget="float_time"/>
+        </xpath>
+    </field>
+</record>
+
+
+    <record id="view_hr_attendance_tree_inherit_late" model="ir.ui.view">
+    <field name="name">hr.attendance.tree.inherit.late</field>
+    <field name="model">hr.attendance</field>
+
+     <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+
+    <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='check_out']" position="after">
+            <field name="late_time_hours" readonly="1" widget="float_time"/>
+        </xpath>
+
+    </field>
+</record>
+
+
+</odoo>

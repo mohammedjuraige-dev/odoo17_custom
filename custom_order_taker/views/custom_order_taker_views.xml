@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree/List View -->
+    <record id="view_custom_order_taker_tree" model="ir.ui.view">
+        <field name="name">custom.order.taker.tree</field>
+        <field name="model">custom.order.taker</field>
+        <field name="arch" type="xml">
+            <tree string="Custom Order Taker">
+                <field name="customer_name"/>
+                <field name="date"/>
+                
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_custom_order_taker_form" model="ir.ui.view">
+        <field name="name">custom.order.taker.form</field>
+        <field name="model">custom.order.taker</field>
+        <field name="arch" type="xml">
+            <form string="Custom Order Taker">
+                <sheet>
+                    <group>
+                        <group>
+                        <field name="customer_name"/>
+                             <field name="product"/>
+
+                            </group>
+                        <group>
+                        <field name="date"/>
+
+
+                        <field name="product_quantity" readonly="1"/>
+
+
+                              <button name="%(custom_order_taker.action_my_wizard)d"
+                         string="Apply" type="action"
+                                class="btn btn-primary o_form_button_right"/>
+
+
+
+                            </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Order lines">
+                            <field name="order_line_id">
+                                <tree editable="bottom" create="0">
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <!-- <button name="action_delete_line"
+                                            type="object"
+                                            icon="fa-trash"
+                                            title="Delete"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+            <div class="oe_chatter">
+            <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Action -->
+    <record id="action_custom_order_taker" model="ir.actions.act_window">
+        <field name="name">Custom Order Taking</field>
+        <field name="res_model">custom.order.taker</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="custom_order_taker_root"
+              name="Custom Order Taker"
+              parent="product_validator.my_menu_root"
+              action="action_custom_order_taker"
+              sequence="30"/>
+</odoo>
