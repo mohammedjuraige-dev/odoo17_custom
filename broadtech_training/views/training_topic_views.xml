@@ -1,0 +1,85 @@
+<odoo>
+
+
+    <!-- Tree view -->
+    <record id="view_training_topic_tree" model="ir.ui.view">
+        <field name="name">training.topic.tree.view</field>
+        <field name="model">training.topic</field>
+        <field name="arch" type="xml">
+            <tree string="Training Topic">
+                <field name="name"/>
+                <field name="difficulty"/>
+                <field name="active"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Form view with all pages -->
+    <record id="view_training_topic_form" model="ir.ui.view">
+        <field name="name">training.topic.form.view</field>
+        <field name="model">training.topic</field>
+        <field name="arch" type="xml">
+            <form string="Training Topic">
+                <sheet>
+                    <notebook>
+                        <page string="Details">
+                            <group>
+                                <field name="name"/>
+                                <field name="difficulty"/>
+                                <field name="active"/>
+                            </group>
+                        </page>
+
+                        <page string="Description">
+                            <group>
+                                <field name="description"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Search view -->
+    <record id="view_training_topic_search" model="ir.ui.view">
+        <field name="name">training.topic.search.view</field>
+        <field name="model">training.topic</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="difficulty"/>
+                <field name="active"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- Action -->
+    <record id="action_training_topic" model="ir.actions.act_window">
+        <field name="name">Training Topic</field>
+        <field name="res_model">training.topic</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_training_topic_search"/>
+    </record>
+
+    <!-- Menu Structure -->
+    <menuitem id="menu_broadtech_training_root" name="Broadtech"/>
+
+    <menuitem
+        id="menu_training_topic"
+        name="Training"
+        parent="menu_broadtech_training_root"
+    />
+
+    <menuitem
+        id="training_topic"
+        name="Topics"
+        parent="menu_training_topic"
+        action="action_training_topic"
+        sequence="10"
+    />
+</odoo>
