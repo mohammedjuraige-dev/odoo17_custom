@@ -1,0 +1,93 @@
+<odoo>
+    <!--    Tree-->
+    <record id="view_training_request_tree" model="ir.ui.view">
+        <field name="name">training.request.tree</field>
+        <field name="model">training.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="state"/>
+                <field name="actives"/>
+                <field name="rejection_reason"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Form-->
+    <record id="view_training_request_form" model="ir.ui.view">
+        <field name="name">training.request.form</field>
+        <field name="model">training.request</field>
+        <field name="arch" type="xml">
+            <form string="Training Request">
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submitted,approved,rejected"/>
+
+<!--                    SUBMIT BUTTON-->
+                    <button name="action_submit"
+                            string="Submit"
+                            type="object"
+                            class="btn-primary"
+                            groups="bt_data_management.group_training_user"
+                            invisible="state != 'draft'"
+                            />
+
+<!--                    APPROVE BUTTON-->
+                    <button name="action_approve"
+                            string="approve"
+                            type="object"
+                            class="btn-primary"
+                            groups="bt_data_management.group_training_manager"
+                            invisible="state != 'submitted'"
+                            />
+
+<!--                    REJECT BUTTON-->
+                       <button name="action_reject"
+                            string="reject"
+                            type="object"
+                            class="btn-primary"
+                            groups="bt_data_management.group_training_manager"
+                               invisible="state != 'submitted'"
+
+                            />
+
+<!--                    RESET TO DRAFT BUTTON-->
+                        <button name="action_draft"
+                                string="Reset to draft"
+                                type="object"
+                                class="btn-primary"
+                                groups="bt_data_management.group_training_user"
+                                invisible="state != 'rejected'"
+                        />
+
+
+
+
+
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" readonly="state == 'approved'"/>
+                        <field name="employee_id" readonly="state == 'approved'"/>
+                        <field name="actives" readonly="1"/>
+                        <field name="rejection_reason" readonly="state == 'approved'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    Action-->
+    <record id="action_training_request" model="ir.actions.act_window">
+        <field name="name">Training Request</field>
+        <field name="res_model">training.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_training_request_tree"/>
+    </record>
+
+    <!--Menu-->
+    <menuitem id="training_request_menu" name="Training Request"
+              parent="broadtech_training.menu_broadtech_training_root"
+              action="action_training_request"/>
+</odoo>

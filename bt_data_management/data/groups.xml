@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Training User group -->
+    <record id="group_training_user" model="res.groups">
+        <field name="name">Training User</field>
+        <!-- Optional: put under a generic category -->
+        <field name="category_id" ref="base.module_category_human_resources"/>
+    </record>
+
+    <!-- Training Manager group -->
+    <record id="group_training_manager" model="res.groups">
+        <field name="name">Training Manager</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<odoo>
+
+ <record id="module_category_training_session" model="ir.module.category">
+        <field name="name">Training session</field>
+    </record>
+
+       <!-- User Group (internal user + CRUD) -->
+    <record id="group_trainer_manager" model="res.groups">
+        <field name="name">Trainer manager </field>
+        <field name="category_id" ref="module_category_training_session"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>

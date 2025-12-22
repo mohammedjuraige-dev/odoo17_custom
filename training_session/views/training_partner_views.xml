@@ -1,55 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Custom Tree View -->
-    <record id="view_training_partner_tree" model="ir.ui.view">
-        <field name="name">training.partner.tree</field>
+    <!-- Inherit Partner Form -->
+    <record id="view_training_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.training.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <group string="Training Information">
+                    <field name="is_instructor"/>
+                    <field name="is_trainee"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Trainee Tree -->
+    <record id="view_trainee_tree" model="ir.ui.view">
+        <field name="name">trainee.tree</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
-            <tree string="Partners">
+            <tree string="Trainee">
                 <field name="name"/>
                 <field name="email"/>
                 <field name="phone"/>
-                <field name="is_instructor"/>
-                <field name="is_trainee"/>
             </tree>
         </field>
     </record>
 
-    <!-- Custom Form View -->
-    <record id="view_training_partner_form" model="ir.ui.view">
-        <field name="name">training.partner.form</field>
+
+    <!-- Instructor Tree -->
+    <record id="view_instructor_tree" model="ir.ui.view">
+        <field name="name">instructor.tree</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
-            <form string="Partner">
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="email"/>
-                        <field name="phone"/>
-                    </group>
-
-                    <group string="Training Information">
-                        <field name="is_instructor"/>
-                        <field name="is_trainee"/>
-                    </group>
-                </sheet>
-            </form>
+            <tree string="Instructor">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+            </tree>
         </field>
     </record>
 
-    <!-- Custom Action -->
-    <record id="action_training_partners" model="ir.actions.act_window">
-        <field name="name">Training Partners</field>
+
+    <!-- Action: Trainee -->
+    <record id="action_trainee" model="ir.actions.act_window">
+        <field name="name">Trainee</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_training_partner_tree"/>
+        <field name="view_id" ref="view_trainee_tree"/>
+        <field name="domain">[('is_trainee','=',True)]</field>
     </record>
 
-    <!-- Custom Menu -->
-    <menuitem id="menu_training_partners"
-              name="Training Partners"
-              parent="Training_module"
-              action="action_training_partners"/>
+
+    <!-- Action: Instructor -->
+    <record id="action_instructor" model="ir.actions.act_window">
+        <field name="name">Instructor</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_instructor_tree"/>
+        <field name="domain">[('is_instructor','=',True)]</field>
+    </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Main Menu -->
+    <menuitem id="master_data"
+              name="Master Data"
+              parent="product_validator.my_menu_root"/>
+
+
+    <!-- Menu: Trainee -->
+    <menuitem id="trainee_data"
+              name="Trainee"
+              parent="master_data"
+              action="action_trainee"/>
+
+
+    <!-- Menu: Instructor -->
+    <menuitem id="instructor_data"
+              name="Instructor"
+              parent="master_data"
+              action="action_instructor"/>
 
 </odoo>
