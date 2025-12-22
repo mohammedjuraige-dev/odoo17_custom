@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <!-- User Rule: See own requests only -->
+        <record id="rule_training_request_user" model="ir.rule">
+            <field name="name">Training Request: User sees own</field>
+            <field name="model_id" ref="model_training_request"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('bt_data_management.group_training_user'))]"/>
+        </record>
+
+        <!-- Manager Rule: See all non-draft requests (OR logic with User rule) -->
+        <!-- Result: (My Requests) OR (Not Draft requests) -->
+        <record id="rule_training_request_manager" model="ir.rule">
+            <field name="name">Training Request: Manager sees submitted</field>
+            <field name="model_id" ref="model_training_request"/>
+            <field name="domain_force">[('state', '!=', 'draft')]</field>
+            <field name="groups" eval="[(4, ref('bt_data_management.group_training_manager'))]"/>
+        </record>
+    </data>
+</odoo>
